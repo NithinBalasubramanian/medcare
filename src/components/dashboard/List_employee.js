@@ -1,10 +1,10 @@
 import React , { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import ListInvoiceTable from './listInvoiceTable';
-import Instance from '../../config/instance';
+import ListEmployee from './ListEmployeeData';
+import Instance from '../../config/Instance';
 import { message } from 'antd'
 
-const ListInvoice = () => {
+function List_employee() {
 
     let [ data , setData ] = useState([]);
 
@@ -13,7 +13,7 @@ const ListInvoice = () => {
     },[])
 
     const fetchData = () => {
-        Instance.get('fetchsalesdata/sales').
+        Instance.get('fetchdata/employee').
             then((res) => {
                 setData(res.data.data);
                 message.success(res.data.msg);
@@ -30,7 +30,7 @@ const ListInvoice = () => {
         const headers = { 
             'Content-Type': "application/x-www-form-urlencoded"
         };
-        Instance.post(`deleteData/sales`,data , { headers }).
+        Instance.post(`deleteData/employee`,data , { headers }).
             then((res) => {
 
                 if(res.status === 200 || res.status === '200'){
@@ -42,7 +42,6 @@ const ListInvoice = () => {
                 }
             })
             .catch((error) => {
-                message.error('somthing went wrong');
                 console.error(error);
             })
     }
@@ -50,19 +49,19 @@ const ListInvoice = () => {
     return (
         <>
             <div className="headerCart row">
-                <h1 className="col-md-8">List Invoice</h1>
+                <h1 className="col-md-8">List Employee</h1>
                 <div className="col-md-4">
-                    <Link to="/dashboard/invoice" className="sideButton ">
-                        Add Invoice
+                    <Link to="/dashboard/Employee/AddEmployee" className="sideButton ">
+                        Add Employee
                     </Link>
                 </div>
             </div>
             <div className="mainCart">
-                <h1>Invoice List</h1>
-                <ListInvoiceTable datas = { data }  onActionClick={ deleteHandler } />
+                <h1>Employee List</h1>
+                <ListEmployee  datas = { data }  onActionClick={ deleteHandler }  />
             </div>
         </>
     )
 }
 
-export default ListInvoice
+export default List_employee;

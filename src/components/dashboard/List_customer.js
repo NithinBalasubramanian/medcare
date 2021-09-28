@@ -1,7 +1,7 @@
 import React , { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import ListCustomer from './listCustomerData';
-import Instance from '../../config/instance';
+import ListCustomer from './ListCustomerData';
+import Instance from '../../config/Instance';
 import { message } from 'antd'
 
 const List_customer = () => {

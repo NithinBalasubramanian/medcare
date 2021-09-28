@@ -3,7 +3,7 @@ import './dashboard.css';
 import { useParams } from 'react-router';
 import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Instance from '../../config/instance';
+import Instance from '../../config/Instance';
 import { message } from 'antd'
 import { useHistory } from "react-router-dom";
 

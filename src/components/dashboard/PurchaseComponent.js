@@ -1,8 +1,8 @@
 import React , { useEffect , useState } from 'react';
 import './dashboard.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Instance from '../../config/instance';
-import PurchaseProductModal from './purchaseProductModal';
+import Instance from '../../config/Instance';
+import PurchaseProductModal from './PurchaseProductModal';
 import { AiFillDelete , AiFillEdit } from 'react-icons/ai'
 import { message } from 'antd'
 import { useHistory  } from "react-router-dom";

@@ -1,10 +1,10 @@
 import React , { useEffect, useState } from 'react';
-import ListProduct from './listProductData'
-import { Link } from 'react-router-dom'
-import Instance from '../../config/instance';
+import { Link } from 'react-router-dom';
+import ListInvoiceTable from './ListInvoiceTable';
+import Instance from '../../config/Instance';
 import { message } from 'antd'
 
-function List_product() {
+const ListInvoice = () => {
 
     let [ data , setData ] = useState([]);
 
@@ -13,7 +13,7 @@ function List_product() {
     },[])
 
     const fetchData = () => {
-        Instance.get('fetchdata/medicine').
+        Instance.get('fetchsalesdata/sales').
             then((res) => {
                 setData(res.data.data);
                 message.success(res.data.msg);
@@ -30,7 +30,7 @@ function List_product() {
         const headers = { 
             'Content-Type': "application/x-www-form-urlencoded"
         };
-        Instance.post(`deleteData/medicine`,data , { headers }).
+        Instance.post(`deleteData/sales`,data , { headers }).
             then((res) => {
 
                 if(res.status === 200 || res.status === '200'){
@@ -42,27 +42,27 @@ function List_product() {
                 }
             })
             .catch((error) => {
+                message.error('somthing went wrong');
                 console.error(error);
             })
     }
 
-
     return (
         <>
-        <div className="headerCart row">
-            <h1 className="col-md-8">List Product</h1>
-            <div className="col-md-4">
-                <Link to="/dashboard/Product/AddProduct" className="sideButton ">
-                    Add Product
-                </Link>
+            <div className="headerCart row">
+                <h1 className="col-md-8">List Invoice</h1>
+                <div className="col-md-4">
+                    <Link to="/dashboard/invoice" className="sideButton ">
+                        Add Invoice
+                    </Link>
+                </div>
             </div>
-        </div>
-        <div className="mainCart">
-            <h1>Product List</h1>
-            <ListProduct  datas = { data }  onActionClick={ deleteHandler }   />
-        </div>
-    </>
+            <div className="mainCart">
+                <h1>Invoice List</h1>
+                <ListInvoiceTable datas = { data }  onActionClick={ deleteHandler } />
+            </div>
+        </>
     )
 }
 
-export default List_product
+export default ListInvoice

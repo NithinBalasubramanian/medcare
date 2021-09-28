@@ -3,12 +3,12 @@ import './dashboard.css';
 import { useParams } from 'react-router';
 import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Instance from '../../config/instance';
+import Instance from '../../config/Instance';
 import { message } from 'antd'
 import { useHistory } from "react-router-dom";
 
 
-function Edit_employee() {
+function Edit_customer() {
 
     const [ state , setState] = useState({});
 
@@ -29,7 +29,7 @@ function Edit_employee() {
     },[])
 
     const fetchData = () => {
-        Instance.get(`fetchEdit/employee/${id}`).
+        Instance.get(`fetchEdit/customer/${id}`).
         then((res) => {
             setState(res.data.data[0]);
             message.success(res.data.msg);
@@ -47,27 +47,27 @@ function Edit_employee() {
             'Content-Type': "application/x-www-form-urlencoded"
         };
 
-        await Instance.post(`updateData/employee/${id}`,data,{ headers })
+        await Instance.post(`updateData/customer/${id}`,data,{ headers })
         .then(response => { 
             if(response.data.status === 200 || response.data.status === '200')
             {
                 message.success(response.data.msg); 
-                history.push('/dashboard/Employee');
+                history.push('/dashboard/Customer');
             }
             else if(response.data.status === 400 || response.data.status === '400')
             {
                 message.error(response.data.msg); 
-                history.push('/dashboard/Employee');
+                history.push('/dashboard/Customer');
             }
             else{
                 message.error('somthing went wrong');
-                history.push('/dashboard/Employee');
+                history.push('/dashboard/Customer');
             }
         })
         .catch(error => { 
             console.log(error);
             message.error('somthing went wrong');
-            history.push('/dashboard/Employee'); 
+            history.push('/dashboard/Customer'); 
         })
     }
 
@@ -157,20 +157,20 @@ function Edit_employee() {
     return (
         <>
             <div className="headerCart row">
-                <h1 className="col-md-8">Edit Employee</h1>
+                <h1 className="col-md-8">Edit Customer</h1>
                 <div className="col-md-4">
                     <Link to="/dashboard/Customer" className="sideButton">
-                        List Employee
+                        List Customer
                     </Link>
                 </div>
             </div>
             <div className="mainCart">
-                <h1>Employee Form</h1>
+                <h1>Customer Form</h1>
                 <div className="formPart row">
                     <div className="col-md-12 ">
                         <form className="row" onSubmit={  formSubmitHandler }>
                             <div className="form-group col-md-6">
-                                <label>Employee Name : * </label><span><small style= {{ color:'red',padding:'opx 10px' }}>{ err.nameError }</small></span>
+                                <label>Customer Name : * </label><span><small style= {{ color:'red',padding:'opx 10px' }}>{ err.nameError }</small></span>
                                 <input type="text" 
                                 className={ ( err.nameError !== '') ? `form-control is-invalid` : ` form-control` }  
                                 name="name" 
@@ -179,7 +179,7 @@ function Edit_employee() {
                                 required></input>
                             </div>
                             <div className="form-group col-md-6">
-                                <label>Employee Email : * </label><span><small style= {{ color:'red',padding:'opx 10px' }}>{ err.emailError }</small></span>
+                                <label>Customer Email : * </label><span><small style= {{ color:'red',padding:'opx 10px' }}>{ err.emailError }</small></span>
                                 <input type="email" 
                                 className={ (err.emailError !== '') ? `form-control is-invalid` : ` form-control` }  
                                 name="email"  
@@ -187,7 +187,7 @@ function Edit_employee() {
                                 onChange={ enterDataHandler }></input>
                             </div>
                             <div className="form-group col-md-6">
-                                <label>Employee Contact : * </label><span><small style= {{ color:'red',padding:'opx 10px' }}>{ err.contactError }</small></span>
+                                <label>Customer Contact : * </label><span><small style= {{ color:'red',padding:'opx 10px' }}>{ err.contactError }</small></span>
                                 <input type="text" 
                                 className={ (err.contactError !== '') ? `form-control is-invalid` : ` form-control` }  
                                 name="contact"  
@@ -195,7 +195,7 @@ function Edit_employee() {
                                 onChange={ enterDataHandler }></input>
                             </div>
                             <div className="form-group col-md-6">
-                                <label>Employee Secondary Contact : </label><span><small style= {{ color:'red',padding:'opx 10px' }}>{ err.seccontactError }</small></span>
+                                <label>Customer Secondary Contact : </label><span><small style= {{ color:'red',padding:'opx 10px' }}>{ err.seccontactError }</small></span>
                                 <input type="text" 
                                 className={ (err.seccontactError !== '') ? `form-control is-invalid` : ` form-control` }  
                                 name="s_contact"  
@@ -232,4 +232,4 @@ function Edit_employee() {
     )
 }
 
-export default Edit_employee
+export default Edit_customer

@@ -1,8 +1,8 @@
 import React , { useState , useEffect } from 'react'
-import Instance from '../../config/instance';
+import Instance from '../../config/Instance';
 import { message } from 'antd';
 
-const ProductModal = ({ close , grandTotal , s_id  }) => {
+const PurchaseProductModal = ({ close , grandTotal , s_id  }) => {
 
     let [ total , setTotal ] = useState(grandTotal);
 
@@ -38,10 +38,10 @@ const ProductModal = ({ close , grandTotal , s_id  }) => {
         .then(res => {
             setData(res.data.data[0]);
             setSubTotal(prevstate => { 
-                return parseInt(res.data.data[0].price_per_piece);
+                return parseInt(res.data.data[0].price_per_box);
             });
             setTotal(prevstate => { 
-                return parseInt(grandTotal) + parseInt(res.data.data[0].price_per_piece);
+                return parseInt(grandTotal) + parseInt(res.data.data[0].price_per_box);
             });
         })
         .catch( error => {
@@ -50,7 +50,7 @@ const ProductModal = ({ close , grandTotal , s_id  }) => {
     }
 
     const priceDispHandle = (e) => {
-        if(e.target.value === 'pieces'){
+        if(e.target.value === 'piece'){
             setPriceDisp(true);
         }else{
             setPriceDisp(false);
@@ -64,13 +64,13 @@ const ProductModal = ({ close , grandTotal , s_id  }) => {
         let value = e.target.value;
 
         if(priceDisp){
-            let val = parseInt(value) * parseInt(data.price_per_piece);
+            let val = parseInt(value) * parseInt(data.price_per_box);
             setSubTotal(val);
             setTotal(prevstate => { 
                 return parseInt(grandTotal) + parseInt(val);
             });
         }else{
-            let b_val = parseInt(value) * parseInt(data.price_per_box);
+            let b_val = parseInt(value) * parseInt(data.price_per_piece);
             setSubTotal(b_val);
             setTotal(prevstate => { 
                 return parseInt(grandTotal) + parseInt(b_val);
@@ -118,10 +118,12 @@ const ProductModal = ({ close , grandTotal , s_id  }) => {
         let payload = {
             unq_id : s_id,
             product_id : data.id,
-            batch_id : data.track_id,
-            sale_type : type_on,
+            batch_id : track_id,
+            purchase_type : type_on,
             qty : qty,
             status : 1,
+            manufacture_date : manufacture_date,
+            exp_date : exp_date,
             sub_total : subTotal,
         }
 
@@ -131,7 +133,7 @@ const ProductModal = ({ close , grandTotal , s_id  }) => {
             'Content-Type': "application/x-www-form-urlencoded"
         };
 
-        Instance.post("insert/sales_product",payload,{ headers })
+        Instance.post("insert/purchase_product",payload,{ headers })
         .then(response => { 
             if(response.data.status === 200 || response.data.status === '200')
             {
@@ -169,24 +171,26 @@ const ProductModal = ({ close , grandTotal , s_id  }) => {
     const saveAndClose = async (e) => {
         e.preventDefault();
 
-        let type_on = 'pieces';
+        let type_on = 'box';
         let price = 0;
 
         if(priceDisp){
-            type_on = 'pieces';
-            price = data.price_per_piece;
-        }else{
             type_on = 'box';
             price = data.price_per_box;
+        }else{
+            type_on = 'pieces';
+            price = data.price_per_piece;
         }
 
         let payload = {
             unq_id : s_id,
             product_id : data.id,
-            batch_id : data.track_id,
-            sale_type : type_on,
+            batch_id : track_id,
+            purchase_type : type_on,
             qty : qty,
             status : 1,
+            manufacture_date : manufacture_date,
+            exp_date : exp_date,
             sub_total : subTotal,
         }
 
@@ -196,7 +200,7 @@ const ProductModal = ({ close , grandTotal , s_id  }) => {
             'Content-Type': "application/x-www-form-urlencoded"
         };
 
-        await Instance.post("insert/sales_product",payload,{ headers })
+        await Instance.post("insert/purchase_product",payload,{ headers })
         .then(response => { 
             if(response.data.status === 200 || response.data.status === '200')
             {
@@ -232,6 +236,23 @@ const ProductModal = ({ close , grandTotal , s_id  }) => {
         close();
     }
 
+    let [ track_id , setTrack_id ] = useState('');
+
+    let [ manufacture_date , setManufacture_date ] = useState('');
+
+    let [ exp_date , setExp_date ] = useState('');
+
+    const addTrack = (e) => {
+
+        if(e.target.name === 'track_id'){
+            setTrack_id(e.target.value);
+        }else if(e.target.name === 'manufacture_date'){
+            setManufacture_date(e.target.value);
+        }else if(e.target.name === 'exp_date'){
+            setExp_date(e.target.value);
+        }
+    }
+
     return(
         <>
             <div className="productModal">
@@ -265,7 +286,7 @@ const ProductModal = ({ close , grandTotal , s_id  }) => {
                                 </div>
                                 <div className="form-group col-md-6" >
                                     <label>Batch Number</label>
-                                    <input type="text" value={ data.track_id } className="form-control" readOnly></input>
+                                    <input type="text" value={ track_id } name="track_id" onChange={ addTrack } className="form-control" ></input>
                                 </div>
                                 <div className="form-group col-md-6" >
                                     <label>Product Type</label>
@@ -273,17 +294,17 @@ const ProductModal = ({ close , grandTotal , s_id  }) => {
                                 </div>
                                 <div className="form-group col-md-6" >
                                     <label>Manufature date</label>
-                                    <input type="text" value={ data.manufacture_date } className="form-control" readOnly></input>
+                                    <input type="date" value={ manufacture_date } name="manufacture_date" onChange={ addTrack } className="form-control" ></input>
                                 </div>
                                 <div className="form-group col-md-6" >
                                     <label>Expire date</label>
-                                    <input type="text" value={ data.exp_date } className="form-control" readOnly></input>
+                                    <input type="date" value={ exp_date } name="exp_date" onChange={ addTrack } className="form-control" ></input>
                                 </div>
                                 <div className="form-group col-md-6" >
                                     <label>Sell Type</label>
                                     <select className="form-control" onChange={ priceDispHandle } >
-                                        <option value="pieces">Pieces</option>
                                         <option value="box">Box</option>
+                                        {/* <option value="pieces">Pieces</option> */}
                                     </select>
                                 </div>
                             </>
@@ -292,15 +313,15 @@ const ProductModal = ({ close , grandTotal , s_id  }) => {
                                 priceDisp ? 
                                 <>
                                     <div className="form-group col-md-6" >
-                                        <label>Price per Piece</label>
-                                        <input type="text" value={ data.price_per_piece } className="form-control" readOnly></input>
+                                        <label>Price per Box</label>
+                                        <input type="text" value={ data.price_per_box } className="form-control" readOnly></input>
                                     </div>
                                 </>
                                  : 
                                  <>
                                     <div className="form-group col-md-6" >
-                                        <label>Price per Box</label>
-                                        <input type="text" value={ data.price_per_box } className="form-control" readOnly></input>
+                                        <label>Price per Piece</label>
+                                        <input type="text" value={ data.price_per_piece } className="form-control" readOnly></input>
                                     </div>
                                 </>
                             }
@@ -321,4 +342,4 @@ const ProductModal = ({ close , grandTotal , s_id  }) => {
     )
 }
 
-export default ProductModal
+export default PurchaseProductModal

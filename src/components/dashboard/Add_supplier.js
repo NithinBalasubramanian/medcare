@@ -2,9 +2,9 @@ import React from 'react';
 import './dashboard.css';
 import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import AddSupplierForm from './addSupplierForm';
+import AddSupplierForm from './AddSupplierForm';
 
-function add_supplier() {
+function Add_supplier() {
     return (
         <>
             <div className="headerCart row">
@@ -23,4 +23,4 @@ function add_supplier() {
     )
 }
 
-export default add_supplier
+export default Add_supplier

@@ -12,24 +12,24 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 //pages
 
-import Customer from './list_customer';
-import AddCustomer from './add_customer';
-import Employee from './list_employee';
-import AddEmployee from './add_employee';
-import Supplier from './list_supplier';
-import AddSupplier from './add_supplier';
-import AddProduct from './add_product';
-import Product from './list_product';
-import Dashboard from './dashboard';
-import Invoice from './add_invoice';
-import ListInvoice from './listInvoice';
-import ListPurchase from './listPurchase';
-import Area from './areaManagement'
-import EmployeeType from './salesMnagement'
-import EditCustomer from './edit_customer'
-import EditEmployee from './edit_employee'
-import EditProduct from './edit_product'
-import AddPurchase from './add_purchase';
+import Customer from './List_customer';
+import AddCustomer from './Add_customer';
+import Employee from './List_employee';
+import AddEmployee from './Add_employee';
+import Supplier from './List_supplier';
+import AddSupplier from './Add_supplier';
+import AddProduct from './Add_product';
+import Product from './List_product';
+import Dashboard from './Dashboard';
+import Invoice from './Add_invoice';
+import ListInvoice from './ListInvoice';
+import ListPurchase from './ListPurchase';
+import Area from './AreaManagement'
+import EmployeeType from './SalesMnagement'
+import EditCustomer from './Edit_customer'
+import EditEmployee from './Edit_employee'
+import EditProduct from './Edit_product'
+import AddPurchase from './Add_purchase';
 
 function Maincont() {
     return(

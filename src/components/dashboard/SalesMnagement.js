@@ -1,12 +1,12 @@
 import React , { useEffect , useState } from "react";
-import Instance from '../../config/instance';
+import Instance from '../../config/Instance';
 import { message } from 'antd'
 
 
-const AreaManagement = () => {
+const SalesManagement = () => {
 
     const initialState = {
-        'area' : '',
+        'type' : '',
     }
 
     const [ state , setState] = useState(initialState);
@@ -33,7 +33,7 @@ const AreaManagement = () => {
             'Content-Type': "application/x-www-form-urlencoded"
         };
 
-        Instance.post("insert/area",data,{ headers })
+        Instance.post("insert/emp_type",data,{ headers })
         .then(response => { 
             if(response.data.status === 200 || response.data.status === '200')
             {
@@ -56,7 +56,7 @@ const AreaManagement = () => {
     }
 
     const fetchArea = () => {
-        Instance.get('fetchdata/area').
+        Instance.get('fetchdata/emp_type').
         then((res) => {
             setDatas(res.data.data);
             message.success(res.data.msg);
@@ -73,7 +73,7 @@ const AreaManagement = () => {
         const headers = { 
             'Content-Type': "application/x-www-form-urlencoded"
         };
-        Instance.post(`deleteData/area`,data , { headers }).
+        Instance.post(`deleteData/emp_type`,data , { headers }).
             then((res) => {
 
                 if(res.status === 200 || res.status === '200'){
@@ -93,24 +93,24 @@ const AreaManagement = () => {
     return(
         <>
             <div className="headerCart row">
-                <h1 className="col-md-8">Area Management</h1>
+                <h1 className="col-md-8">Employee Type Management</h1>
             </div>
             <div className="mainCart">
-                <h1>Add Area</h1>
+                <h1>Add Employee Type</h1>
                 <form className="row" onSubmit={ addArea }>
                     <div className="form-group col-md-6">
-                        <lable>Area</lable>
-                        <input type="text" name='area' onChange={ changeHandler } value={ state.area } className="form-control"></input>
+                        <lable>Employee Type</lable>
+                        <input type="text" name='type' onChange={ changeHandler } value={ state.type } className="form-control"></input>
                         <button className="btn btn-success btn-sm" type="submit">Submit</button>
                     </div>
                 </form>
-                <h1 className="mt-3"> Area List</h1>
+                <h1 className="mt-3"> Employee Type List</h1>
                 <div className="table-responsive tablePart">
                     <table className="table table-bordered table-hover table-striped">
                         <thead style={{'backgroundColor':'#61DAFB'}} >
                             <tr>
                                 <th>S.No</th>
-                                <th>Area</th>
+                                <th>Employee Type</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -121,7 +121,7 @@ const AreaManagement = () => {
                                     return ( 
                                     <tr>
                                         <td>{ k+1 }</td>
-                                        <td>{ itm.area }</td>
+                                        <td>{ itm.type }</td>
                                         <td><button type="button" onClick = {() => { onActionClick(id) }} className="btn btn-danger btn-sm" key={k}>Delete</button></td>
                                     </tr>
                                     )
@@ -134,4 +134,4 @@ const AreaManagement = () => {
     )
 }
 
-export default AreaManagement
+export default SalesManagement

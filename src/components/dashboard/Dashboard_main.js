@@ -3,11 +3,11 @@ import logo from '../../assets/logo512.png';
 import '../../display.css';
 import './dashboard.css';
 import { NavLink} from 'react-router-dom';
-import Sidebar from './sidebar';
-import Maincont from './maincont';
+import Sidebar from './Sidebar';
+import Maincont from './Maincont';
 import { BrowserRouter as Router} from 'react-router-dom';
 import { BiMenuAltLeft } from 'react-icons/bi';
-import LoginComponent from './loginComponent';
+import LoginComponent from './LoginComponent';
 import { useHistory } from "react-router-dom";
 import { message } from 'antd';
 

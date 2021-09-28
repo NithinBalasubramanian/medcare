@@ -2,9 +2,9 @@ import React from 'react';
 import './dashboard.css';
 import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import AddCustomerForm from './addCustomerForm';
+import AddCustomerForm from './AddCustomerForm';
 
-function add_customer() {
+function Add_customer() {
     return (
         <>
             <div className="headerCart row">
@@ -23,4 +23,4 @@ function add_customer() {
     )
 }
 
-export default add_customer
+export default Add_customer

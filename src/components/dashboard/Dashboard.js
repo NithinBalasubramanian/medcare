@@ -1,6 +1,6 @@
 import React from 'react'
 
-function dashboard() {
+function Dashboard() {
 
     let user = localStorage.getItem('name');
 
@@ -16,4 +16,4 @@ function dashboard() {
     )
 }
 
-export default dashboard
+export default Dashboard

@@ -1,5 +1,5 @@
 import React , { Component } from 'react';
-import Instance from '../../config/instance';
+import Instance from '../../config/Instance';
 import { message } from 'antd'
 
 const initialState = {

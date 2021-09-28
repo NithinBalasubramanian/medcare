@@ -2,25 +2,25 @@ import React from 'react'
 import './dashboard.css';
 import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import PurchaseComponent from './purchaseComponent';
+import AddEmployeeForm from './AddEmployeeForm';
 
-function add_purchase() {
+function Add_employee() {
     return (
         <>
             <div className="headerCart row">
-                <h1 className="col-md-8">Add Purchase</h1>
+                <h1 className="col-md-8">Add Employee</h1>
                 <div className="col-md-4">
-                    <Link to="/dashboard/listpurchase" className="sideButton">
-                        List Purchase
+                    <Link to="/dashboard/Employee" className="sideButton">
+                        List Employee
                     </Link>
                 </div>
             </div>
             <div className="mainCart">
-                <h1>Purchase Form</h1>
-                <PurchaseComponent />
+                <h1>Employee Form</h1>
+                <AddEmployeeForm />
             </div>
         </>
     )
 }
 
-export default add_purchase
+export default Add_employee

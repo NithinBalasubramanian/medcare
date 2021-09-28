@@ -1,10 +1,10 @@
 import React , { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import Instance from '../../config/instance';
+import ListProduct from './ListProductData'
+import { Link } from 'react-router-dom'
+import Instance from '../../config/Instance';
 import { message } from 'antd'
-import ListSupplier from './listSupplierData';
 
-function List_supplier() {
+function List_product() {
 
     let [ data , setData ] = useState([]);
 
@@ -13,7 +13,7 @@ function List_supplier() {
     },[])
 
     const fetchData = () => {
-        Instance.get('fetchdata/supplier').
+        Instance.get('fetchdata/medicine').
             then((res) => {
                 setData(res.data.data);
                 message.success(res.data.msg);
@@ -30,7 +30,7 @@ function List_supplier() {
         const headers = { 
             'Content-Type': "application/x-www-form-urlencoded"
         };
-        Instance.post(`deleteData/supplier`,data , { headers }).
+        Instance.post(`deleteData/medicine`,data , { headers }).
             then((res) => {
 
                 if(res.status === 200 || res.status === '200'){
@@ -49,20 +49,20 @@ function List_supplier() {
 
     return (
         <>
-            <div className="headerCart row">
-                <h1 className="col-md-8">List Supplier</h1>
-                <div className="col-md-4">
-                    <Link to="/dashboard/Supplier/AddSupplier" className="sideButton ">
-                        Add Supplier
-                    </Link>
-                </div>
+        <div className="headerCart row">
+            <h1 className="col-md-8">List Product</h1>
+            <div className="col-md-4">
+                <Link to="/dashboard/Product/AddProduct" className="sideButton ">
+                    Add Product
+                </Link>
             </div>
-            <div className="mainCart">
-                <h1>Supplier List</h1>
-                <ListSupplier  datas = { data }  onActionClick={ deleteHandler }  />
-            </div>
-        </>
+        </div>
+        <div className="mainCart">
+            <h1>Product List</h1>
+            <ListProduct  datas = { data }  onActionClick={ deleteHandler }   />
+        </div>
+    </>
     )
 }
 
-export default List_supplier;
+export default List_product

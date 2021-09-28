@@ -1,7 +1,7 @@
 import React , { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import ListPurchTable from './listPurchTable';
-import Instance from '../../config/instance';
+import ListPurchTable from './LlistPurchTable';
+import Instance from '../../config/Instance';
 import { message } from 'antd'
 
 const ListPurchase = () => {

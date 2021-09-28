@@ -1,8 +1,7 @@
 import React , { useState } from 'react';
 import './dashboard.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import axios from '../../config/instance';
-import Instance from '../../config/instance';
+import Instance from '../../config/Instance';
 import { message } from 'antd';
 
 function AddProductForm() {
