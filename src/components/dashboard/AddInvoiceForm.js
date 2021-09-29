@@ -104,8 +104,8 @@ function AddInvoiceForm() {
         const headers = { 
             'Content-Type': "application/x-www-form-urlencoded"
         };
-        await Instance.post(`deleteData/sales_product`,data , { headers }).
-            then((res) => {
+        await Instance.post(`deleteData/sales_product`,data,{ headers })
+            .then((res) => {
 
                 if(res.status === 200 || res.status === '200'){
                     message.success(res.data.msg);

@@ -25,7 +25,7 @@ import Invoice from './Add_invoice';
 import ListInvoice from './ListInvoice';
 import ListPurchase from './ListPurchase';
 import Area from './AreaManagement'
-import EmployeeType from './SalesMnagement'
+import EmployeeType from './SalesManagement'
 import EditCustomer from './Edit_customer'
 import EditEmployee from './Edit_employee'
 import EditProduct from './Edit_product'
