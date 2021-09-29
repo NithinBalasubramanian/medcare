@@ -35,7 +35,7 @@ function Maincont() {
     return(
         <div className="mainContCart">
             <Switch>
-                <Route path="/" exact>
+                <Route path="" exact>
                     <Dashboard />
                 </Route>
                 <Route path="/" exact>
