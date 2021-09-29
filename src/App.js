@@ -9,6 +9,7 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Switch>
+            <Route path='' component={ Dashboard_main }  exact />
             <Route path='/' component={ Dashboard_main }  exact />
             <Route path='/dashboard' component={ Dashboard_main }  />
         </Switch>
