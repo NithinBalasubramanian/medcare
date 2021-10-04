@@ -5,7 +5,7 @@ import './dashboard.css';
 import { NavLink} from 'react-router-dom';
 import Sidebar from './Sidebar';
 import Maincont from './Maincont';
-import { BrowserRouter as Router} from 'react-router-dom';
+import { BrowserRouter , Redirect } from 'react-router-dom';
 import { BiMenuAltLeft } from 'react-icons/bi';
 import LoginComponent from './LoginComponent';
 import { useHistory } from "react-router-dom";
@@ -24,49 +24,47 @@ function Dashboard_main() {
     const clear = () => {
         localStorage.clear();
         message.success('Logged out successfully');
-        history.push('/');
+        // history.push('/dashboard');
+        window.location.reload();
     }
 
     return (
-        <>
+
+        <BrowserRouter>
+
         { localStorage.getItem('name') ?
             <>
-                <div className="nav_main">
-                    <div className="logo">
-                    <BiMenuAltLeft  onClick={sidebarStatusHandler} size="50px" color="#fff" style={{margin:"20px"}}/>
-                    <div className="logo_img">
-                        {/* <img src={logo} width="100%" alt="logo" height="100%" /> */}
-                    </div>
-                    <h4>
-                        MEDCARE
-                    </h4>
-                    </div>
-                    <div className="nav_list">
-                    <div className="nav_list_outs">
-                        <div className="nav_list_outs_data">
-
-                            {/* Top right lists  */}
-
-                            {/* <ul>
-                                <li><NavLink to='/' exact activeClassName="mainNavActive">HOME</NavLink></li>
-                                <li><NavLink to='/project' activeClassName="mainNavActive">PROJECTS</NavLink></li>
-                                <li><NavLink to='/dashboard' activeClassName="mainNavActive">DASHBOARD</NavLink></li>
-                            </ul> */}
-                        </div>
-                    </div>
-                    </div>
-
-                    <p className="logout" onClick={ clear }>Logout</p>
+            <div className="nav_main">
+                <div className="logo">
+                <BiMenuAltLeft  onClick={sidebarStatusHandler} size="50px" color="#fff" style={{margin:"20px"}}/>
+                <div className="logo_img">
+                    {/* <img src={logo} width="100%" alt="logo" height="100%" /> */}
                 </div>
-                <div className="flexPart">
-                <Router>
-                    <Sidebar status={display_status} />
-                    <Maincont />
-                </Router>
+                <h4>
+                    MEDCARE
+                </h4>
                 </div>
-            </>: 
+                <div className="nav_list">
+                <div className="nav_list_outs">
+                    <div className="nav_list_outs_data">
+
+                        {/* Top right lists  */}
+
+                        {/* <ul>
+                            <li><NavLink to='/' exact activeClassName="mainNavActive">HOME</NavLink></li>
+                            <li><NavLink to='/project' activeClassName="mainNavActive">PROJECTS</NavLink></li>
+                            <li><NavLink to='/dashboard' activeClassName="mainNavActive">DASHBOARD</NavLink></li>
+                        </ul> */}
+                    </div>
+                </div>
+                </div>
+
+                <p className="logout" onClick={ clear }>Logout</p>
+            </div>
+            <Maincont />
+            </> : 
             <LoginComponent /> }
-        </>
+        </BrowserRouter>
     )
 }
 

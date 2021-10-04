@@ -1,6 +1,6 @@
 {
   "name": "medcare_v2",
-  "homepage": "https://medcare-admin.herokuapp.com/",
+  "homepage": "http://medcare.virtualtechnology.in",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

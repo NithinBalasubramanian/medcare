@@ -1,7 +1,7 @@
 import { message } from 'antd';
 import React , { useState } from 'react';
 import Instance from '../../config/Instance';
-import { useHistory } from "react-router-dom";
+import { useHistory , Redirect } from "react-router-dom";
 
 const LoginComponent = () => {
 
@@ -37,7 +37,10 @@ const LoginComponent = () => {
                 {
                     message.success(response.data.msg); 
                     localStorage.setItem('name',response.data.data[0].name);
-                    history.push("/") 
+                    // history.push("/"); 
+                    // return <Redirect  to="/" />
+
+                    window.location.reload();
                 }
                 else if(response.data.status === 201 || response.data.status === '201')
                 {
@@ -48,12 +51,14 @@ const LoginComponent = () => {
                     message.error(response.data.msg); 
                 }
                 else{
-                    message.error('somthing went wrong');
+                    // message.error('somthing went wrong');
+                    history.push("/"); 
                 }
             })
             .catch(error => { 
                 console.log(error);
-                message.error('somthing went wrong'); 
+                history.push("/"); 
+                // message.error('somthing went wrong'); 
             })
         }else{
             message.warning('Please enter the values !!!');
